@@ -5,11 +5,11 @@
   class Board{
 
     public $board;
-    public $goalNumber;
+    public $goal_point;
 
     function __construct($path){
       $this->board = File::getArrayFromCsv($path);
-      $this->goalNumber = count($this->board);
+      $this->goal_point = count($this->board);
     }
 
     function getBoard(){
