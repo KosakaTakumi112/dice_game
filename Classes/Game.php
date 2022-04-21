@@ -32,15 +32,31 @@
           fgets(STDIN);
           $number = $this->dice->rollDice();
           echo $number . "が出ました。\n";
+          echo $number . "マス進む\n";
 
           //ここに進むか戻るかゴールの判定をしたメソッドを用意する。
-          echo $number . "マス進む\n";
-          $player->goForward($number);
-          echo $player->name . "さんは現在" . $player->standing_point . "マス目にいます。\n";
+          $next_point = $player->standing_point + $number;
 
-          if ($player->standing_point > $this->board->goalNumber){
+          if ($next_point <= $this->board->goalNumber){
+            $player->goForward($number);
+          }
+
+          if ($next_point > $this->board->goalNumber){
+            $goNumber = $this->board->goalNumber - $player->standing_point;
+            $player->goForward($goNumber);
+            $backNumber = $number - $goNumber;
+            $player->goBackward($backNumber);
+            echo "ゴール地点で折り返し！\n";
+            echo $backNumber . "マス戻った！";
+          }
+
+
+          //ゴール判定
+          if ($player->standing_point == $this->board->goalNumber){
             echo $player->name . "さんがゴールしました!\n";
             unset($this->players[$key]);
+          }else{
+            echo $player->name . "さんは現在" . $player->standing_point . "マス目にいます。\n";
           }
 
         }
