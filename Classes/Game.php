@@ -2,7 +2,7 @@
 
   class Game{
 
-    public $board = [];
+    public $board;
     public $players = [];
     public $dice;
 
@@ -23,18 +23,18 @@
 
     function start(){
       echo "ゲームを始めます。\n";
-      echo "ゴールは". $this->board->goalNumber ."マス目にあります。";
+      echo "ゴールは". $this->board->goalNumber ."マス目にあります。\n\n";
       while($this->players){
         foreach($this->players as $key => $player){
           
-          echo $player->name . "さんの番です。サイコロを振ってください\n";
+          echo "\n" . $player->name . "さんの番です。\nサイコロを振ってください\n";
           echo "Enterを押してサイコロの目を確定させてください\n";
           fgets(STDIN);
           $number = $this->dice->rollDice();
-          echo $number . "が出ました。\n";
+          echo $number . "が出ました。\n\n";
           echo $number . "マス進む\n";
 
-          //ここに進むか戻るかゴールの判定をしたメソッドを用意する。
+          //進むか戻るか判定する。
           $next_point = $player->standing_point + $number;
 
           if ($next_point <= $this->board->goalNumber){
@@ -55,17 +55,41 @@
           if ($player->standing_point == $this->board->goalNumber){
             echo $player->name . "さんがゴールしました!\n";
             unset($this->players[$key]);
-          }else{
-            echo $player->name . "さんは現在" . $player->standing_point . "マス目にいます。\n";
+            break;
+          }
+          
+          echo $player->name . "さんは" . $player->standing_point . "マス目に止まった。\n";
+          $number_on_standing_point = $this->board->board[$player->standing_point];
+
+          echo $player->standing_point . "マス目に書かれている数字は" . $number_on_standing_point. "だ！\n";
+
+          //効果判定
+          if ($number_on_standing_point > 0){
+            echo "マスの効果発動！\n";
+            echo $player->name . "は" . $number_on_standing_point. "マス進んだ！\n";
+            $player->goForward($number_on_standing_point);
+            echo $player->name . "さんは" . $player->standing_point . "マス目に止まった。\n";
+
+          }
+          if ($number_on_standing_point < 0){
+            echo "マスの効果発動！\n";
+            echo $player->name . "は" . $number_on_standing_point. "マス戻る\n";
+            $player->goBackward($number_on_standing_point);
+            echo $player->name . "さんは" . $player->standing_point . "マス目に止まった。\n";
+
+          }
+
+          //効果判定後のゴール判定
+          if ($player->standing_point == $this->board->goalNumber){
+            echo $player->name . "さんがゴールしました!\n";
+            unset($this->players[$key]);
+            break;
           }
 
         }
 
       }
     }
-
-
-    
 
 
   }

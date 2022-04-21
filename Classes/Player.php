@@ -18,7 +18,6 @@
       $this->standing_point -= $n;
     }
 
-
   }
 
 ?>

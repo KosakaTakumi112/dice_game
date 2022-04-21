@@ -11,7 +11,9 @@
   $game->addPlayer(new Player("Jiro"));
   $game->setDice(new Dice());
 
-  print_r($game->players);
+
+  // echo $game->board->board[0] ;
+  // print_r($game->players);
   
   $game->start();
 
