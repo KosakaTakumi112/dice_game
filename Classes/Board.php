@@ -9,7 +9,7 @@
 
     function __construct($path){
       $this->board = File::getArrayFromCsv($path);
-      $this->goal_point = count($this->board);
+      $this->goal_point = count($this->board) - 1;
     }
 
     function getBoard(){

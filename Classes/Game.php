@@ -18,19 +18,40 @@
       $this->dice = $dice;
     }
 
+    function printGameProgress($player){
+      $progress = $this->board->board;
+      $progress[$player->standing_point] = $player->name;
+      $tmp = [];
+      foreach($progress as $key => $value){
+        $masu = <<<EOT
+        | $value 
+        EOT;
+        $tmp[] = $masu;
+      }
+      echo "\n";
+      foreach($tmp as $key => $value){
+        echo $value;
+      }
+      echo "\n";
+    }
+
     function start(){
       echo "ゲームを始めます。\n";
-      echo "ゴールは". $this->board->goal_point ."マス目にあります。\n\n";
+      echo "ゴールは". $this->board->goal_point ."マス目にあります。\n";
       while($this->players){
         foreach($this->players as $key => $player){
 
-          //サイコロをふる
-          $dice_number = $player->startCommand($this->dice);
+          $this->printGameProgress($player);
+
+          //サイコロ・アイテム・必殺技のコマンド選択
+          $dice_number = $player->startCommand($this->dice,$this->board,$this->players);
+          //もし移動しないアイテムを使っていた場合は、ターン終了
+          if(!$dice_number){ break ; }
 
           //進むか戻るか判定する。
           $player->goOrBack($dice_number, $this->board->goal_point);
 
-          //サイコロをふり、移動した後のゴール判定
+          //移動した後のゴール判定
           if ($player->standing_point == $this->board->goal_point){
             echo $player->name . "さんがゴールしました!\n";
             unset($this->players[$key]);
@@ -49,6 +70,8 @@
             unset($this->players[$key]);
             break;
           }
+
+          $this->printGameProgress($player);
 
         }
       }
