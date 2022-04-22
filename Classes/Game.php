@@ -1,5 +1,7 @@
 <?php
 
+  require_once "Board.php";
+
   class Game{
 
     public $board;
@@ -40,13 +42,13 @@
       echo "ゴールは". $this->board->goal_point ."マス目にあります。\n";
       while($this->players){
         foreach($this->players as $key => $player){
-          print_r($this->players);
 
           $this->printGameProgress($player);
 
           //サイコロ・アイテム・必殺技のコマンド選択
           $dice_number = $player->startCommand($this->dice,$this->board,$this->players);
           //もし移動しないアイテムを使っていた場合は、ターン終了
+          if($dice_number == "changeWorld"){$this->setBoard(new Board("Classes/sample1.csv")); continue;}
           if(!$dice_number){ continue ; }
 
           //進むか戻るか判定する。

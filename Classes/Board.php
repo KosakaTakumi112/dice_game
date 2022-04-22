@@ -12,10 +12,6 @@
       $this->goal_point = count($this->board) - 1;
     }
 
-    function getBoard(){
-      return $this->board;
-    }
-
   }
 
 ?>

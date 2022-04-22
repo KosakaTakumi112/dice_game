@@ -2,6 +2,7 @@
 
 
   require_once "Item.php";
+  require_once "File.php";
 
   class Player{
 
@@ -67,7 +68,11 @@
 
             if($item_number == 1){
               echo "必殺技を使った！\n";
-              $this->special_skill = false;
+              if($this->special_skill == "changeWorld"){
+                echo "チェンジワールド！\n";
+                $this->special_skill = false;
+                return "changeWorld";
+              }
               return false;
             }
           }
