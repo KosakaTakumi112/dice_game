@@ -8,14 +8,14 @@
 
     public $name;
     public $standing_point;
-    public $items = ["kinoko","wana","teleport","roto"];
+    public $items = ["kinoko","wana","teleport","roto","roto","roto","roto","roto","roto","roto"];
     public $special_skill;
 
     function __construct($name){
       $this->name = $name;
       $this->standing_point = 0;
       if($name == "Taro"){$this->special_skill = "changeWorld";}
-      if($name == "Jiro"){$this->special_skill = "reverseWorld";}
+      if($name == "Jiro"){$this->special_skill = "changePosition";}
     }
 
     function startCommand($dice,$board,$players){
@@ -72,6 +72,12 @@
                 echo "チェンジワールド！\n";
                 $this->special_skill = false;
                 return "changeWorld";
+              }
+              if($this->special_skill == "changePosition"){
+                echo "チェンジポジション！\n";
+                $this->special_skill = false;
+                Item::useItem("teleport",$this,$board,$players);
+                return;
               }
               return false;
             }

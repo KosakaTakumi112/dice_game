@@ -11,6 +11,8 @@
         "wana" => "今いるマスに罠を仕掛けることができる。",
         "teleport" => "相手と居場所を交換する",
         "roto" => "いいことが起こるかも",
+        "ガリガリくん" => "ガリガリ....",
+        "fly_ticket" => "豪華なフライトができる",
       ];
 
       foreach($items as $key => $value){
@@ -37,12 +39,6 @@
       }
 
       if($name == "teleport"){
-        echo $player->name . "はテレポートを使った。\n";
-        echo "誰と居場所を交換しますか？\n";
-        foreach($players as $key => $player1){
-          if($player == $player1){ continue;}
-          echo $player1->name . "=>" . $key . "\n";
-        }
         $number = (int) fgets(STDIN);
         echo $player->name . "は" . $players[$number]->name . "と場所を交換した！\n";
         $tmp = $player->standing_point;
@@ -53,23 +49,42 @@
 
       if($name == "roto"){
         echo "さぁ、サイコロを降りなさい！\n";
-        echo "でた目が1か6なら以下の効果が得られる！\n";
-        echo "1 => 全ての人の居場所を入れ替えちゃう。\n";
-        echo "6 => みんな振り出しになる\n";
+        echo "でた目が6なら豪華アイテムゲット！\n";
         $dice = Dice::rollDice();
         sleep(1);
         echo $dice . "\n\n";
         sleep(1);
-        if($dice == 1){
-          echo "全ての人の居場所がランダムに入れ替わる！\n";
-          return;
-        }
         if($dice == 6){
-          echo "みんな振り出しになった！\n";
+          echo "大当たり！\n";
+          echo "ガリガリくんプレゼント！\n";
+          $player->items[] = "ガリガリくん";
           return;
         }
         echo "ハズレ！ターン終了\n";
         return;
+      }
+
+      if($name == "ガリガリくん"){
+        echo "ガリガリくんを食べた！\n";
+        sleep(1);
+        echo "......\n";
+        sleep(1);
+        echo "何とガリガリくんも当たってしまった！\n";
+        sleep(1);
+        echo "お店に持ってくと当たり棒と引き換えに航空券をもらった！\n";
+        $player->items[] = "fly_ticket";
+        return;
+
+      }
+
+      if($name == "fly_ticket"){
+        echo "航空券を使って豪華にひとっ飛び!\n";
+        sleep(1);
+        echo "ふぅ〜いいフライドだったな... \n";
+        sleep(1);
+        echo "ゴールの１マス前に着陸した。\n";
+        $player->standing_point = $board->goal_point -1;
+        return ;
       }
     }
 
