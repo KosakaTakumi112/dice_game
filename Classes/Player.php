@@ -8,7 +8,7 @@
 
     public $name;
     public $standing_point;
-    public $items = ["kinoko","wana","teleport","roto","roto","roto","roto","roto","roto","roto"];
+    public $items = ["kinoko","wana","roto","roto","roto","roto"];
     public $special_skill;
 
     function __construct($name){
