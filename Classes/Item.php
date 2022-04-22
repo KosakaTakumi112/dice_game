@@ -62,14 +62,14 @@
         sleep(1);
         if($dice == 1){
           echo "全ての人の居場所がランダムに入れ替わる！\n";
-          return ;
+          return;
         }
         if($dice == 6){
           echo "みんな振り出しになった！\n";
           return;
         }
         echo "ハズレ！ターン終了\n";
-        return ;
+        return;
       }
     }
 

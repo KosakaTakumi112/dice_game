@@ -13,6 +13,8 @@
     function __construct($name){
       $this->name = $name;
       $this->standing_point = 0;
+      if($name == "Taro"){$this->special_skill = "changeWorld";}
+      if($name == "Jiro"){$this->special_skill = "reverseWorld";}
     }
 
     function startCommand($dice,$board,$players){
@@ -51,6 +53,22 @@
               $number = Item::useItem($item_name,$this,$board,$players);
               unset($this->items[$item_number]);
               return $number;
+            }
+          }
+
+          if ($selected_number == 3){
+            if(!$this->special_skill){ echo "必殺技はもう使いました\n"; break;}
+            echo "必殺技を使いますか？必殺技は１度しか使えません。\n";
+            echo $this->name. "の必殺技は" . $this->special_skill . "\n";
+            echo "使う => 1   使わない => n \n";
+            $item_number = fgets(STDIN);
+            if(!(is_numeric($item_number))){ break; }
+            $item_number = (int) $item_number;
+
+            if($item_number == 1){
+              echo "必殺技を使った！\n";
+              $this->special_skill = false;
+              return false;
             }
           }
 
