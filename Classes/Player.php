@@ -33,8 +33,12 @@
 
           if ($selected_number == 1){
             $number = $dice->rollDice();
-            echo $number . "が出ました。\n\n";
-            echo $number . "マス進む\n";
+            echo $number . "\n\n";
+            sleep(2);
+            echo $number . "が出ました。\n";
+            sleep(1);
+            echo $number . "マス進む。\n";
+            sleep(1);
             return $number;
           }
 
@@ -112,7 +116,10 @@
         echo $backNumber . "マス戻った！";
       }
 
+      sleep(1);
       echo $this->name . "さんは" . $this->standing_point . "マス目に止まった。\n";
+      sleep(1);
+
     }
 
     function getEffectOnStandingPoint($number_on_standing_point){

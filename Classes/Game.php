@@ -38,8 +38,29 @@
     }
 
     function start(){
-      echo "ゲームを始めます。\n";
+      sleep(1);
+      echo "第三回すごろく大会決勝を開始します。\n";
+      sleep(1);
+      echo "決勝に進出したプレイヤーの紹介をします。\n";
+      sleep(1);
+      echo "過去二大会共に優勝している最強プレイヤーの~~~~\n";
+      sleep(2);
+      echo "Jiro------!\n";
+      sleep(1);
+      echo "Jiroくんの必殺技は大変強いですからね〜。それが優勝の秘訣でもありますよね。\n";
+      sleep(1);
+      echo "そして対する今回の挑戦者は~~~~~\n";
+      sleep(1);
+      echo "Taro----------！\n";
+      sleep(1);
+      echo "彼にも頑張ってほしいですね。\n";
+      sleep(2);
+      echo "それではゲームを始めます。\n";
+      sleep(1);
       echo "ゴールは". $this->board->goal_point ."マス目にあります。\n";
+      sleep(1);
+      echo "すごろく開始！\n";
+
       while($this->players){
         foreach($this->players as $key => $player){
 
