@@ -82,6 +82,9 @@
           //移動した後のゴール判定
           if ($player->standing_point == $this->board->goal_point){
             echo $player->name . "さんがゴールしました!\n";
+            sleep(2);
+            echo "おめでとう〜〜〜〜〜！！！！\n";
+            sleep(2);
             unset($this->players[$key]);
             break;
           }

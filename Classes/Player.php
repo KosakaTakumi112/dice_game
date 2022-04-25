@@ -141,6 +141,33 @@
           $this->goBackward($number_on_standing_point);
           echo $this->name . "さんは" . $this->standing_point . "マス目に止まった。\n";
         }
+
+        if($number_on_standing_point == 0){
+          echo "マスの効果はなし！\n";
+          sleep(1);
+          echo "寂しいから名言をプレゼント！\n";
+          sleep(2);
+          $random_number = rand(1,3);
+          $messages = 
+          [
+            "Vision:テクノロジーで世界を革新する。",
+            "Mission:ITの専門知識と課題解決の知見によって社会をアップデートする。",
+            "行動指針:ハイスタンダードであれ 変革を体現する 個の成長を追求せよ チャレンジが全て",
+            "結論firstか、全体像から話すか、その使い分けは聞き手の背景知識の有無である。",
+            "今どんなに辛くても一年後は笑っているさ",
+            "せっかくお弁当作ったのに持っていくの忘れた、、、。",
+            "仕事を通して「専門性」を高めていく、「人間性」を深めていく、「人格」を高めていく、「魂」を磨いていくということ。",
+            "俺がやる、協力する、明るくする",
+            "自分には何ができるか悩み抜け",
+            "結果が出ない努力に意味はない",
+          ];
+          $message = $messages[$random_number];
+          $message_array = preg_split("/\B/u", $message);
+          foreach($message_array as $key => $value){
+              echo $value;
+              usleep(100000);
+          }
+        }
       }
 
       if(is_string($number_on_standing_point)){
