@@ -39,7 +39,7 @@
       }
 
       if($name == "teleport"){
-        $number = (int) fgets(STDIN);
+        $number = 0;
         echo $player->name . "は" . $players[$number]->name . "と場所を交換した！\n";
         $tmp = $player->standing_point;
         $player->standing_point = $players[$number]->standing_point;

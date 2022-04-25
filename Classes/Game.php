@@ -31,10 +31,13 @@
         $tmp[] = $masu;
       }
       echo "\n";
+      echo "========================================================================================================================================\n";
       foreach($tmp as $key => $value){
         echo $value;
       }
       echo "\n";
+      echo "========================================================================================================================================\n";
+
     }
 
     function start(){
@@ -64,6 +67,7 @@
       while($this->players){
         foreach($this->players as $key => $player){
 
+          sleep(1);
           $this->printGameProgress($player);
 
           //サイコロ・アイテム・必殺技のコマンド選択
@@ -83,7 +87,10 @@
           }
 
           $number_on_standing_point = $this->board->board[$player->standing_point];
+          sleep(1);
           echo $player->standing_point . "マス目に書かれている数字は" . $number_on_standing_point. "だ！\n";
+          sleep(1);
+
 
           //マスに書いてある数字が0以外であれば効果を受ける
           $player->getEffectOnStandingPoint($number_on_standing_point);
@@ -95,7 +102,9 @@
             break;
           }
 
+          sleep(1);
           $this->printGameProgress($player);
+         
 
         }
       }

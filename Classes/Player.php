@@ -19,8 +19,10 @@
     }
 
     function startCommand($dice,$board,$players){
-      echo "\n" . $this->name . "さんの番です。";
+      echo "\n" . $this->name . "さんの番です。\n";
+      sleep(1);
       echo "コマンドを決めてください\n";
+      sleep(1);
       while( true ){
 
         echo "サイコロ -> 1 , アイテム -> 2 , 必殺技 -> 3 \n";
@@ -38,7 +40,6 @@
             echo $number . "が出ました。\n";
             sleep(1);
             echo $number . "マス進む。\n";
-            sleep(1);
             return $number;
           }
 
@@ -98,6 +99,9 @@
 
     function goBackward($n){
       $this->standing_point -= $n;
+      if ($this->standing_point < 0){
+        $this->standing_point = 0;
+      }
     }
 
     function goOrBack($dice_number, $goal_point){
@@ -141,12 +145,21 @@
 
       if(is_string($number_on_standing_point)){
         if ($number_on_standing_point == "穴"){
+          sleep(1);
           echo "振り出しに戻ってしまった！\n";
           $this->standing_point = 0;
+          sleep(1);
+
         }
-        if ($number_on_standing_point == "アイテム"){
-          echo "アイテムがもらえる\n";
-          $this->items += "kinoko";
+        if ($number_on_standing_point == "罠"){
+          sleep(1);
+
+          echo "罠に引っかかってしまった！\n";
+          sleep(1);
+          $this->items = [];
+          echo "アイテムを全て失った！\n";
+          sleep(1);
+
         }
       }
 
